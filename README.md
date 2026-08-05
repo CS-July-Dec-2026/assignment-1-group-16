@@ -1,4 +1,8 @@
-# Classmate Hub — Secure Encrypted Messaging (Lab 1 Part B)
+# CS_Lab_1 - Group 16 Submission
+
+## Video Link
+
+https://drive.google.com/file/d/11G7oWC8UcXofiujz6iPx6n0daWz1e2B8/view?usp=sharing
 
 ## Overview
 
