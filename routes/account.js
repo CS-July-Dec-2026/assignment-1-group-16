@@ -3,6 +3,17 @@ const router = express.Router();
 const db = require("../db");
 const { page } = require("../views");
 
+
+function escapeHtml(str) {
+  if (!str) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 router.get("/account", (req, res) => {
   if (!req.cookies.username) {
     return res.redirect("/");
@@ -14,12 +25,15 @@ router.get("/account", (req, res) => {
     return res.redirect("/");
   }
 
+  const safeDisplayName = escapeHtml(me.display_name);
+  const safeMessage = escapeHtml(me.message);
+
   const messageBlock = me.message
-    ? `<div class="message-box">💬 <strong>${me.display_name}'s message:</strong><br>${me.message}</div>`
+    ? `<div class="message-box">💬 <strong>${safeDisplayName}'s message:</strong><br>${safeMessage}</div>`
     : `<div class="message-box empty">💬 No message set yet.</div>`;
 
   res.send(page("My Page", `
-    <h1>👋 Hi, ${me.display_name}!</h1>
+    <h1>👋 Hi, ${safeDisplayName}!</h1>
     ${messageBlock}
     <div class="button-row">
       <a href="/set-message" class="btn btn-yellow">✏️ Set My Message</a>
