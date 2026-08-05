@@ -62,6 +62,16 @@ Classmate Hub is a simple Node.js and Express web application where students can
 
 ---
 
+## Verification Checklist
+
+- [x] **Locked account page**: Navigating to the account page after setting a message shows a locked state requiring a password.
+- [x] **Unlocked/decrypted page**: Entering the correct password reveals the plaintext immediately, without reloading the page.
+- [x] **Database shows ciphertext**: Checking the `classmates.db` database directly reveals unreadable Base64 ciphertext in the `message` column, not plaintext.
+- [x] **Network tab on Save**: Inspecting the POST request to `/set-message` shows only the `ciphertext` and `iv` being transmitted.
+- [x] **Network tab on Unlock**: Clicking "Unlock" generates zero network requests, verifying that decryption is 100% client-side.
+
+---
+
 ## How It Works
 
 ### Encryption Flow (`/set-message` page)
@@ -96,11 +106,3 @@ Classmate Hub is a simple Node.js and Express web application where students can
 | `base64ToBuffer(base64)` | Helper function to convert a Base64 string back to binary ArrayBuffer for decryption. | *(No crypto API)* |
 
 ---
-
-## Verification Checklist
-
-- [x] **Locked account page**: Navigating to the account page after setting a message shows a locked state requiring a password.
-- [x] **Unlocked/decrypted page**: Entering the correct password reveals the plaintext immediately, without reloading the page.
-- [x] **Database shows ciphertext**: Checking the `classmates.db` database directly reveals unreadable Base64 ciphertext in the `message` column, not plaintext.
-- [x] **Network tab on Save**: Inspecting the POST request to `/set-message` shows only the `ciphertext` and `iv` being transmitted.
-- [x] **Network tab on Unlock**: Clicking "Unlock" generates zero network requests, verifying that decryption is 100% client-side.
