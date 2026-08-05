@@ -29,8 +29,9 @@ router.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  const checkQuery = "SELECT * FROM accounts WHERE username = '" + username + "' AND password = '" + password + "'";
-  const match = db.prepare(checkQuery).get();
+  // Insecure concatenated query:
+const checkQuery = "SELECT * FROM accounts WHERE username = '" + username + "' AND password = '" + password + "'";
+const match = db.prepare(checkQuery).get();
 
   if (!match) {
     return res.send(loginForm("😕 That username/password didn't match. Try again!"));
