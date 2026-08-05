@@ -5,6 +5,10 @@ const Database = require("better-sqlite3");
 const dbFile = path.join(__dirname, "classmates.db");
 const isNewDatabase = !fs.existsSync(dbFile);
 const db = new Database(dbFile);
+try {
+  db.exec("ALTER TABLE accounts ADD COLUMN message_iv TEXT");
+} catch (e) {
+}
 
 if (isNewDatabase) {
   db.exec(`
